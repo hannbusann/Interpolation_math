@@ -1,0 +1,3 @@
+/home/zjudancer/try/threespline/build/CMakeFiles/edit_cache.dir
+/home/zjudancer/try/threespline/build/CMakeFiles/rebuild_cache.dir
+/home/zjudancer/try/threespline/build/CMakeFiles/threespline_try.dir

@@ -1,3 +1,0 @@
-/Users/apple/CLionProjects/Interpolation_math/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/Users/apple/CLionProjects/Interpolation_math/cmake-build-debug/CMakeFiles/edit_cache.dir
-/Users/apple/CLionProjects/Interpolation_math/cmake-build-debug/CMakeFiles/threespline_try.dir

@@ -1,1 +1,0 @@
-/usr/bin/c++      CMakeFiles/threespline_try.dir/test/threespline_test.cpp.o  -o threespline_try -rdynamic 

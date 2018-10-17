@@ -24,9 +24,9 @@
 #include <unsupported/Eigen/Polynomials>
 #include <vector>
 
-#include <PolynomialInternal.hpp>
+#include "PolynomialInternal.hpp"
 
-namespace polynomial
+namespace dmotion
 {
     /**
      * Polynomial

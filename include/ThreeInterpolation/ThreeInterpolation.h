@@ -9,7 +9,7 @@
 #include <vector>
 #include <Eigen/Dense>
 #include <EigenTypes.h>
-#include <Polynomial.hpp>
+#include "../Polynomial/Polynomial.hpp"
 
 namespace dmotion {
 
@@ -19,7 +19,6 @@ namespace dmotion {
         const vector<double> x_array_;       //样本点的x坐标序列，dmoiton工程中是时间
         const vector<double> y_array_;       //样本点的y坐标序列，dmotion工程中是肢端坐标值
         const vector<double> s_angle_;       //样本点的倾斜角度，dmotion工程中是肢端坐标值的变化速度
-
     public:
         //参数健全的构造函数
         ThreeInterpolation(const std::vector<double> &x_array,

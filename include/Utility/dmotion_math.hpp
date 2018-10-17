@@ -12,21 +12,21 @@
 namespace dmotion {
 
 
-    /*
+    /**
      * 把曲线斜率化为倾斜角（角度制）的函数
      */
     template<class T>
     double Slope_to_AngleDeg(T s) {
         return atan(s) * 57.3;
     }
-    /*
+    /**
      * 角度制到弧度值的转换
      */
     template<class T>
     inline T Deg2Rad(T deg) {
         return deg * M_PI / 180;
     }
-    /*
+    /**
      * 弧度值到角度值的转换
      */
     template<class T>

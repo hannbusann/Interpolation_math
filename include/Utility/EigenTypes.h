@@ -1,7 +1,7 @@
 #pragma once
 
 #include <Eigen/Dense>
-
+#include <vector>
 // namespace Motion {
 
 /// A column vector of size 1 (that is, a scalar), templated on scalar type.

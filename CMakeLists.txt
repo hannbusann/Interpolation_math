@@ -8,6 +8,6 @@ include_directories(${EIGEN3_INCLUDE_DIR})
 include_directories( ./include/Utility)
 
 
-add_executable(threespline_try test/threespline_test.cpp )
+add_executable(threespline_try test/threespline_test.cpp include/ThreeSpline/ThreeSpline.h)
 
 # include/Utility/EigenTypes.h )

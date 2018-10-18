@@ -1,8 +1,8 @@
 #pragma once
 
 #include <Eigen/Dense>
-
-// namespace Motion {
+#include <vector>
+namespace dmotion {
 
 /// A column vector of size 1 (that is, a scalar), templated on scalar type.
     template <typename Scalar>
@@ -109,4 +109,4 @@
 
     template <typename Scalar>
     inline const AngleAxis<Scalar> AngleAxisX(const Scalar q) { return AngleAxis<Scalar>(q, Vector3<Scalar>::UnitX());}
-// };
+ };

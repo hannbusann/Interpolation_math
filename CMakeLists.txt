@@ -6,9 +6,9 @@ find_package( Eigen3 REQUIRED)
 include_directories(${EIGEN3_INCLUDE_DIR})
 
 include_directories(./include/Polynomial
-        ./include/ThreeInterpolation)
-add_library(ThreeInterpolate ./include/ThreeInterpolation/ThreeInterpolation.cpp
-        )
+        ./include/ThreeInterpolation
+        ./include/Utility/dmotion_math.hpp)
+add_library(ThreeInterpolate ./include/ThreeInterpolation/ThreeInterpolation.cpp)
 
 add_executable(three_try test/three_try.cpp )
 target_link_libraries(three_try ThreeInterpolate )

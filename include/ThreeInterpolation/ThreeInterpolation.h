@@ -18,9 +18,11 @@ namespace dmotion {
     private:
         int piece_num_;
         std::vector<dmotion::Polynomial<3>> poly_;
-        std::vector<double> x_array_;       //样本点的x坐标序列，dmoiton工程中是时间
-        std::vector<double> y_array_;       //样本点的y坐标序列，dmotion工程中是肢端坐标值
-        std::vector<double> s_angle_;       //样本点的倾斜角度，dmotion工程中是肢端坐标值的变化速度
+        std::vector<double> x_array_;
+        std::vector<double> y_array_;
+        std::vector<double> s_angle_;
+        std::vector<double> x_samples_;
+        std::vector<double> y_samples_;
 
     public:
         //参数健全的构造函数
@@ -28,27 +30,37 @@ namespace dmotion {
                            const std::vector<double> &y_array,
                            const std::vector<double> &s_angle);
 
+        ThreeInterpolation(const std::vector<double> &x_array,
+                           const std::vector<double> &y_array);
 
-        //拷贝构造函数
-        ThreeInterpolation(const ThreeInterpolation &interpo_in);
 
         //析构函数
         ~ThreeInterpolation();
+
+        //构造对象的时候要先判断输入的参数是否有效，x_array必须是顺序的
+        bool isInOrder(std::vector<double> &x_ar);
 
         //经过这一步计算，算出这些分段多项式的Polynomial对象
         void Calculate();
 
         //获得曲线所对应的函数的定义域中的某一x点的函数值
-        double EvalHere(double x0);
+        double EvalHere(double x0) const;
 
         //获得固定时间间隔下样本点的Eval序列，时间t0是这个间隔时间，单位是ms,有默认毫秒数20ms
-        std::vector<double> &GetPoints(int t0 = 20);
+        void CalculatePoinsts(int t0_in = 20);
+
+        //获取t0时间间隔下的分段函数值点序列
+        std::vector<double> &GetPoints();
+
+        //获取和GetPoints相对应的时间序列。
+        std::vector<double> &GetTimes();
 
         //添加一个点，并重新进行calculate这一步
-        void AddPoint(double x_a, double y_a);
+        void AddPoint(double x_a, double y_a, double s_a);
+
 
         //查看一个分段的三次多项式系数
-        Eigen::Matrix<double, 4, 1> GetCoef(int piece_num);
+        Eigen::Matrix<double, 4, 1> GetCoef(int piece_num) const;
 
     };
 

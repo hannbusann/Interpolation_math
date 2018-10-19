@@ -55,7 +55,7 @@ class Polynomial
     {
     }
 
-    explicit Polynomial(const Eigen::Matrix<double, deg + 1, 1> &coefin) //创建有值的
+    explicit Polynomial(const Eigen::Matrix<double, deg + 1, 1> &coefin)
         : coef(coefin)
     {
     }
@@ -120,7 +120,7 @@ class Polynomial
     }
 
     template <int degin>
-    Polynomial<degin> &operator=(const Polynomial<degin> &poly) const
+    Polynomial<degin> operator=(const Polynomial<degin> &poly) const
     {
         if (coef == poly.coef)
             return *this;

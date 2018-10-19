@@ -147,7 +147,7 @@ namespace dmotion {
     void ThreeInterpolation::AddPoint(double x_a, double y_a, double s_a) {
         int i;
 
-        /*
+        /**
          *  //  先判定x_a在哪个区间
          *  //  举例：原本有4个点，根据x_a落入如下区间的位置定i的值
          *  //  piece_num_ = 3
@@ -163,14 +163,81 @@ namespace dmotion {
                 i = piece_num_ + 1;
                 break;
             }
-            if (x_a >= x_array_[i] && x_a < x_array_[i + 1])
+            if (x_a >= x_array_[i] && x_a < x_array_[i + 1]) {
+                i++;
                 break;
+            }
         }
 
+        if (i == 0) {
+            std::cout << std::endl << "this is good:" << i << std::endl;
+            Eigen::Vector4d B(y_a, s_a, y_array_[0], s_angle_[0]);
+            Eigen::Matrix4d A;
+            A << pow(x_a, 3), pow(x_a, 2), x_a, 1,
+                    3 * pow(x_a, 2), 2 * x_a, 1, 0,
+                    pow(x_array_[0], 3), pow(x_array_[0], 2), x_array_[0], 1,
+                    3 * pow(x_array_[0], 2), 2 * x_array_[0], 1, 0;
+            Eigen::Matrix<double, 4, 1> coef_solved = A.lu().solve(B);
 
+            poly_.insert(poly_.begin(), Polynomial<3>(coef_solved));
+            x_samples_.clear();
+            y_samples_.clear();
+            x_array_.insert(x_array_.begin(), x_a);
+            y_array_.insert(y_array_.begin(), y_a);
+            s_angle_.insert(s_angle_.begin(), s_a);
+            piece_num_++;
+        } else if (i == piece_num_ + 1) {
+            std::cout << std::endl << "this is good:" << i << std::endl;
+            Eigen::Vector4d B(y_a, s_a, y_array_[piece_num_], s_angle_[piece_num_]);
+            Eigen::Matrix4d A;
+            A << pow(x_a, 3), pow(x_a, 2), x_a, 1,
+                    3 * pow(x_a, 2), 2 * x_a, 1, 0,
+                    pow(x_array_[piece_num_], 3), pow(x_array_[piece_num_], 2), x_array_[piece_num_], 1,
+                    3 * pow(x_array_[piece_num_], 2), 2 * x_array_[piece_num_], 1, 0;
+            Eigen::Matrix<double, 4, 1> coef_solved = A.lu().solve(B);
 
+            poly_.emplace_back(coef_solved);
+            x_samples_.clear();
+            y_samples_.clear();
+            x_array_.emplace_back(x_a);
+            y_array_.emplace_back(y_a);
+            s_angle_.emplace_back(s_a);
+            piece_num_++;
+        } else {
+            std::cout << std::endl << "this is good:" << i << std::endl;
+            Eigen::Vector4d B_up(y_a, s_a, y_array_[i - 1], s_angle_[i - 1]);
+            Eigen::Matrix4d A_up;
+            A_up << pow(x_a, 3), pow(x_a, 2), x_a, 1,
+                    3 * pow(x_a, 2), 2 * x_a, 1, 0,
+                    pow(x_array_[i - 1], 3), pow(x_array_[i - 1], 2), x_array_[i - 1], 1,
+                    3 * pow(x_array_[i - 1], 2), 2 * x_array_[i - 1], 1, 0;
+            Eigen::Matrix<double, 4, 1> coef_solved_up = A_up.lu().solve(B_up);
+
+            Eigen::Vector4d B_down(y_a, s_a, y_array_[i], s_angle_[i]);
+            Eigen::Matrix4d A_down;
+            A_down << pow(x_a, 3), pow(x_a, 2), x_a, 1,
+                    3 * pow(x_a, 2), 2 * x_a, 1, 0,
+                    pow(x_array_[i], 3), pow(x_array_[i], 2), x_array_[i], 1,
+                    3 * pow(x_array_[i], 2), 2 * x_array_[i], 1, 0;
+            Eigen::Matrix<double, 4, 1> coef_solved_down = A_down.lu().solve(B_down);
+
+            poly_.erase(poly_.begin() + i - 1);
+            poly_.insert(poly_.begin() + i - 1, Polynomial<3>(coef_solved_up));
+            poly_.insert(poly_.begin() + i, Polynomial<3>(coef_solved_down));
+            x_samples_.clear();
+            y_samples_.clear();
+            x_array_.insert(x_array_.begin() + i, x_a);
+            y_array_.insert(y_array_.begin() + i, y_a);
+            s_angle_.insert(s_angle_.begin() + i, s_a);
+            piece_num_++;
+        }
     }
 
 
 }
+
+
+
+
+
 

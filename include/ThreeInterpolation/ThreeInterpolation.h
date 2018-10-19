@@ -56,7 +56,7 @@ namespace dmotion {
         std::vector<double> &GetTimes();
 
         //添加一个点，并重新进行calculate这一步
-        void AddPoint(double x_a, double y_a, double s_a);
+        void AddPoint(double x_a, double y_a, double s_a = 0);
 
 
         //查看一个分段的三次多项式系数

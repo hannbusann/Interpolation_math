@@ -18,7 +18,7 @@
 #include <vector>
 #include <queue>
 
-namespace polynomial
+namespace dmotion
 {
     namespace Internal
     {

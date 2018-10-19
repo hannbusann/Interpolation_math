@@ -26,7 +26,8 @@
 
 #include "PolynomialInternal.hpp"
 
-namespace polynomial
+using namespace dmotion;
+namespace dmotion
 {
 /**
      * Polynomial
@@ -54,17 +55,17 @@ class Polynomial
     {
     }
 
-    Polynomial(const Eigen::Matrix<double, deg + 1, 1> &coefin) //创建有值的
+    explicit Polynomial(const Eigen::Matrix<double, deg + 1, 1> &coefin) //创建有值的
         : coef(coefin)
     {
     }
 
-    Polynomial(const Polynomial<deg> &polyin)
+    explicit Polynomial(const Polynomial<deg> &polyin)
         : coef(polyin.coef)
     {
     }
 
-    Polynomial(const double *coefin)
+    explicit Polynomial(const double *coefin)
         : coef(Internal::vecmap<deg + 1>(coefin))
     {
     }
@@ -164,6 +165,6 @@ class Polynomial
     }
 };
 
-} // namespace polynomial
+} // namespace dmotion
 
 #endif

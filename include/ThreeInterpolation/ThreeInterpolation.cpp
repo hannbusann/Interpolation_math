@@ -51,8 +51,11 @@ namespace dmotion {
      * 默认的析构函数，留在这里以防备用
      */
     ThreeInterpolation::~ThreeInterpolation() = default;
-
-
+    /**
+     * 判定输入的x_array序列是否合格
+     * @param x_ar 输入的x_array序列
+     * @return 返回是否合格的bool值
+     */
     bool ThreeInterpolation::isInOrder(std::vector<double> &x_ar) {
         unsigned i = 0;
         do {
@@ -69,8 +72,7 @@ namespace dmotion {
     }
 
     /**
-     * 用于计算的一步，完成分段多项式的计算和时间点的
-     * @param t0_in
+     * 用于计算的一步，完成分段多项式的计算
      */
     void ThreeInterpolation::Calculate() {
         poly_.clear();
@@ -85,10 +87,12 @@ namespace dmotion {
             Eigen::Matrix<double, 4, 1> coef_solved = A.lu().solve(B);
             poly_.emplace_back(coef_solved);
         }
-
-
     }
-
+    /**
+     * 获得分段三次插值曲线某一点的值
+     * @param x0 欲获得坐标点的横坐标
+     * @return 返回这个x0对应的坐标值
+     */
     double ThreeInterpolation::EvalHere(double x0) const {
         int i;
         for (i = 0; i < piece_num_; i++) {
@@ -104,7 +108,10 @@ namespace dmotion {
         return poly_[i].eval(x0);
 
     }
-
+    /**
+     * 用于获得固定时间间隔的分段三次曲线的值，无返回值
+     * @param t0_in 时间序列的间隔，单位为ns
+     */
     void ThreeInterpolation::CalculatePoinsts(int t0_in) {
         x_samples_.clear();
         y_samples_.clear();
@@ -120,20 +127,33 @@ namespace dmotion {
         x_samples_.emplace_back(x_array_[piece_num_]);
     }
 
+    /**
+     * 在Calculate后获得某一分段的三次多项式的四个系数
+     * @param piece_num_in 想要获得第几个分段的多项式系数
+     * @return
+     */
     Eigen::Matrix<double, 4, 1> ThreeInterpolation::GetCoef(int piece_num_in) const {
         if (piece_num_in < 1 || piece_num_in > piece_num_) {
             Eigen::Matrix<double, 4, 1> n;
+            std::cerr << "The number of this piece is beyond range. " << std::endl;
             n << 0, 0, 0, 0;
             return n;
         }
         return poly_[piece_num_in - 1].coefficients();
     }
 
+    /**
+     * 在CalculatePoints之后获得计算出来的点的坐标值
+     * @return 返回这些坐标点的vector
+     */
     std::vector<double> &ThreeInterpolation::GetPoints() {
-
         return y_samples_;
     }
 
+    /**
+     * 在CalculatePoints之后获得计算出来的时间点，作为舵机发值的时间戳
+     * @return 返回这些时间点的vector
+     */
     std::vector<double> &ThreeInterpolation::GetTimes() {
         return x_samples_;
     }
@@ -168,7 +188,9 @@ namespace dmotion {
                 break;
             }
         }
-
+        /**
+         *  //  在确定了x_a在哪个空间后，分情况对这几种情况对已有的poly_ 进行改造
+         */
         if (i == 0) {
             std::cout << std::endl << "this is good:" << i << std::endl;
             Eigen::Vector4d B(y_a, s_a, y_array_[0], s_angle_[0]);

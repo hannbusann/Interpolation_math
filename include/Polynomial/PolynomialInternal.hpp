@@ -499,7 +499,7 @@ namespace dmotion
                 }
                 
                 roots.resize(root_intervals.size());
-                for ( int i = 0; i < root_intervals.size(); i++ )
+                for ( unsigned i = 0; i < root_intervals.size(); i++ )
                 {
                     roots[i] = BisectionMethod<Eigen::Dynamic>::compute(sc[0],root_intervals[i].lb,root_intervals[i].ub);
                 }

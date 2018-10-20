@@ -7,7 +7,7 @@ include_directories(${EIGEN3_INCLUDE_DIR})
 
 include_directories(./include/Polynomial
         ./include/ThreeInterpolation
-        ./include/Utility/dmotion_math.hpp)
+        ./include/Utility)
 add_library(ThreeInterpolate ./include/ThreeInterpolation/ThreeInterpolation.cpp)
 
 add_executable(three_try test/three_try.cpp )

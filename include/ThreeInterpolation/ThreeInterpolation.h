@@ -29,6 +29,7 @@ namespace dmotion {
         ThreeInterpolation(const std::vector<double> &x_array,
                            const std::vector<double> &y_array,
                            const std::vector<double> &s_angle);
+
         //缺省了斜率的构造函数
         ThreeInterpolation(const std::vector<double> &x_array,
                            const std::vector<double> &y_array);

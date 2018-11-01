@@ -18,30 +18,6 @@ The namespace can be changed if necessary.
 
 ---
 
-## Tree
-
-```.
-├── CMakeLists.txt
-├── include
-│   ├── Polynomial
-│   │   ├── Polynomial.hpp
-│   │   └── PolynomialInternal.hpp
-│   ├── ThreeInterpolation
-│   │   ├── ThreeInterpolation.cpp
-│   │   └── ThreeInterpolation.h
-│   ├── ThreeSpline
-│   │   └── SimpleInterpolation.hpp
-│   └── Utility
-│       └── dmotion_math.hpp
-├── matlab
-│   └── three_try.m
-├── README.md
-└── test
-    └── three_try.cpp
-```
-
----
-
 ## Functions
 
 In ThreeInterpolation folder, the source file **ThreeInterpolation.cpp** and header file **ThreeInterpolation.h** declare and define the **ThreeInterpolation** class. Specific annotations are in code, temporarily only Chinese explaination contained.

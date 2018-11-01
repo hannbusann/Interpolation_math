@@ -112,7 +112,7 @@ namespace dmotion {
      * 用于获得固定时间间隔的分段三次曲线的值，无返回值
      * @param t0_in 时间序列的间隔，单位为ns
      */
-    void ThreeInterpolation::CalculatePoinsts(int t0_in) {
+    void ThreeInterpolation::CalculatePoints(int t0_in) {
         x_samples_.clear();
         y_samples_.clear();
         double t_tmp = x_array_[0];
@@ -192,7 +192,7 @@ namespace dmotion {
          *  //  在确定了x_a在哪个空间后，分情况对这几种情况对已有的poly_ 进行改造
          */
         if (i == 0) {
-            std::cout << std::endl << "this is good:" << i << std::endl;
+            //std::cout << std::endl << "this is good:" << i << std::endl;
             Eigen::Vector4d B(y_a, s_a, y_array_[0], s_angle_[0]);
             Eigen::Matrix4d A;
             A << pow(x_a, 3), pow(x_a, 2), x_a, 1,
@@ -209,7 +209,7 @@ namespace dmotion {
             s_angle_.insert(s_angle_.begin(), s_a);
             piece_num_++;
         } else if (i == piece_num_ + 1) {
-            std::cout << std::endl << "this is good:" << i << std::endl;
+            //std::cout << std::endl << "this is good:" << i << std::endl;
             Eigen::Vector4d B(y_a, s_a, y_array_[piece_num_], s_angle_[piece_num_]);
             Eigen::Matrix4d A;
             A << pow(x_a, 3), pow(x_a, 2), x_a, 1,
@@ -226,7 +226,7 @@ namespace dmotion {
             s_angle_.emplace_back(s_a);
             piece_num_++;
         } else {
-            std::cout << std::endl << "this is good:" << i << std::endl;
+            //std::cout << std::endl << "this is good:" << i << std::endl;
             Eigen::Vector4d B_up(y_a, s_a, y_array_[i - 1], s_angle_[i - 1]);
             Eigen::Matrix4d A_up;
             A_up << pow(x_a, 3), pow(x_a, 2), x_a, 1,

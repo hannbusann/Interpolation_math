@@ -42,7 +42,7 @@ namespace dmotion {
         double EvalHere(double x0) const;
 
         //获得固定时间间隔下样本点的Eval序列，时间t0是这个间隔时间，单位是ms,有默认毫秒数20ms
-        void CalculatePoinsts(int t0_in = 20);
+        void CalculatePoints(int t0_in = 20);
 
         //获取t0时间间隔下的分段函数值点序列
         std::vector<double> &GetPoints();

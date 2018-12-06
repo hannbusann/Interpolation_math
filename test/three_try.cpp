@@ -25,6 +25,10 @@ int main(int argc, char **argv) {
     //dmotion::PrintVector(object.GetTimes());
 
 
+    ThreeInterpolation obb(xx, yy);
+    cout << "no slopes" << endl;
+    dmotion::PrintVector(obb.GetPoints());
+    dmotion::PrintVector(obb.GetTimes());
     return 0;
 
 }

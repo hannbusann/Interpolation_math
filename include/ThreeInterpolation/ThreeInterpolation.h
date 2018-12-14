@@ -28,6 +28,7 @@ namespace dmotion {
         std::vector<double> y_samples_;
 
     public:
+        bool is_order = false;
         //参数健全的构造函数
         ThreeInterpolation(const std::vector<double> &x_array,
                            const std::vector<double> &y_array,

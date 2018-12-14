@@ -90,15 +90,18 @@ namespace dmotion {
     bool ThreeInterpolation::isInOrder(std::vector<double> &x_ar) {
         unsigned i = 0;
         do {
-            if (x_ar[i] > x_ar[i + 1])
+            if (x_ar[i] > x_ar[i + 1]) {
+                is_order = false;
                 return false;
+            }
             else if (x_ar[i] == x_ar[i + 1]) {
-                x_ar.erase(x_ar.begin() + i);
+                x_array_.erase(x_array_.begin() + i);
                 y_array_.erase(y_array_.begin() + i);
                 s_angle_.erase(s_angle_.begin() + i);
             } else
                 i++;
         } while (i < (x_ar.size() - 1));
+        is_order = true;
         return true;
     }
 

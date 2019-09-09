@@ -75,7 +75,3 @@ The data is derived from C++ code and plot by matlab script.
 
 
 
-
-
-
-changsdfgdsfdsagdfag

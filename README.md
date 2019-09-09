@@ -17,7 +17,18 @@ These tools depend on Eigen modules (mainly Dense) and C++ Standard Library. You
 The namespace can be changed if necessary.
 
 ---
+## Test
 
+In `./test` folder provides a test sample to test the fundamental functions, you have to do:
+
+```
+mkdir build 
+cd build 
+cmake .. 
+make 
+./three_try
+```
+Now you can see the output, and see below instructions to understand what `./test/there_try.cpp` is doing.
 ## Functions
 
 In ThreeInterpolation folder, the source file **ThreeInterpolation.cpp** and header file **ThreeInterpolation.h** declare and define the **ThreeInterpolation** class. Specific annotations are in code, temporarily only Chinese explaination contained.
@@ -48,7 +59,7 @@ Add a sample point with its horizontal coordinates x_a, vertical coordinates y_a
 
 #### GetCoef
 
-Get piece_num th section of three degree polynomial's coefficients.
+Get piece_num<sup>th</sup> section of three degree polynomial's coefficients.
 
 ---
 
